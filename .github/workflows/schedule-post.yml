@@ -25,4 +25,4 @@ jobs:
           TX_API_CONSUMER_KEY: ${{ secrets.TX_API_CONSUMER_KEY }}
           TX_CONSUMER_SECRET: ${{ secrets.TX_CONSUMER_SECRET }}
           BSKY_APP_PASSWORD: ${{ secrets.BSKY_APP_PASSWORD }}
-        run: node crosspost.js
+        run: node index.js
