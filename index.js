@@ -24,9 +24,6 @@ const client = new Client({
 	strategies: [bluesky, twitter],
 });
 
-// post to all two
-//await client.post("Success in crossposting to X and Bluesky!");
-
 async function shortenURL(longUrl) {
     try {
         // Request to is.gd URL shortening service
