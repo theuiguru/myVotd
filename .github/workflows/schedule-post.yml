@@ -1,0 +1,28 @@
+name: Scheduled Post
+on:
+  schedule:
+    - cron: "00 22 * * *"
+
+jobs:
+  post:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout Repo
+        uses: actions/checkout@v3
+
+      - name: Set Up Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: 18
+
+      - name: Install Dependencies
+        run: npm install
+
+      - name: Run Crossposting Script
+        env:
+          TX_ACCESS_TOKEN: ${{ secrets.TX_ACCESS_TOKEN }}
+          TX_ACCESS_TOKEN_SECRET: ${{ secrets.TX_ACCESS_TOKEN_SECRET }}
+          TX_API_CONSUMER_KEY: ${{ secrets.TX_API_CONSUMER_KEY }}
+          TX_CONSUMER_SECRET: ${{ secrets.TX_CONSUMER_SECRET }}
+          BSKY_APP_PASSWORD: ${{ secrets.BSKY_APP_PASSWORD }}
+        run: node crosspost.js
