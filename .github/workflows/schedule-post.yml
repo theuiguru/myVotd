@@ -1,7 +1,7 @@
 name: Scheduled Post
 on:
   schedule:
-    - cron: "00 22 * * *"
+    - cron: "03 18 * * *"
 
 jobs:
   post:
