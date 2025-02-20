@@ -1,7 +1,5 @@
 name: Scheduled Post
 on:
-  schedule:
-    - cron: "0 13 * * *" # Runs at 8:00 AM EST (13:00 UTC)
   workflow_dispatch:  # Allows manual execution
 
 jobs:
@@ -10,10 +8,6 @@ jobs:
     steps:
       - name: Checkout Repo
         uses: actions/checkout@v3
-
-      # Print the exact UTC time when the workflow starts
-      - name: Print execution time
-        run: date -u
 
       - name: Set Up Node.js
         uses: actions/setup-node@v3
