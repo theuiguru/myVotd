@@ -1,7 +1,7 @@
 name: Scheduled Post
 on:
   schedule:
-    - cron: "10 23 * * *"
+    - cron: "3 0 * * *"
 
 jobs:
   post:
@@ -9,6 +9,10 @@ jobs:
     steps:
       - name: Checkout Repo
         uses: actions/checkout@v3
+
+      # Print the exact UTC time when the workflow starts
+      - name: Print execution time
+        run: date -u
 
       - name: Set Up Node.js
         uses: actions/setup-node@v3
