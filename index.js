@@ -25,20 +25,20 @@ const client = new Client({
 });
 
 async function shortenURL(longUrl) {
-    try {
-        // Request to is.gd URL shortening service
-        const response = await axios.get(`https://is.gd/create.php?format=simple&url=${encodeURIComponent(longUrl)}`);
-        return response.data;
-    } catch (error) {
-        console.error('Error shortening URL:', error);
-    }
+	try {
+		// Request to is.gd URL shortening service
+		const response = await axios.get(`https://is.gd/create.php?format=simple&url=${encodeURIComponent(longUrl)}`);
+		return response.data;
+	} catch (error) {
+		console.error('Error shortening URL:', error);
+	}
 }
 
 async function fetchQuote() {
 	try {
 		const response = await axios.get("https://www.biblegateway.com/votd/get/?format=json&version=nkjv");
 		const decodedContent = he.decode(response.data.votd.text);
-        const shortenedUrl = await shortenURL(response.data.votd.permalink);
+		const shortenedUrl = await shortenURL(response.data.votd.permalink);
 		return `${decodedContent} - ${response.data.votd.reference} \n${shortenedUrl}`;
 	} catch (error) {
 		console.error("Error fetching quote:", error);
