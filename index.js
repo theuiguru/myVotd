@@ -24,22 +24,11 @@ const client = new Client({
 	strategies: [bluesky, twitter],
 });
 
-async function shortenURL(longUrl) {
-	try {
-		// Request to is.gd URL shortening service
-		const response = await axios.get(`https://is.gd/create.php?format=simple&url=${encodeURIComponent(longUrl)}`);
-		return response.data;
-	} catch (error) {
-		console.error('Error shortening URL:', error);
-	}
-}
-
 async function fetchQuote() {
 	try {
 		const response = await axios.get("https://www.biblegateway.com/votd/get/?format=json&version=nkjv");
 		const decodedContent = he.decode(response.data.votd.text);
-		const shortenedUrl = await shortenURL(response.data.votd.permalink);
-		return `${decodedContent} - ${response.data.votd.reference} \n${shortenedUrl}`;
+		return `${decodedContent} - ${response.data.votd.reference} \n${response.data.votd.permalink}`;
 	} catch (error) {
 		console.error("Error fetching quote:", error);
 		return "Inspirational message of the day!";
