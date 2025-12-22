@@ -28,7 +28,10 @@ async function fetchQuote() {
 	try {
 		const response = await axios.get("https://www.biblegateway.com/votd/get/?format=json&version=nkjv");
 		const decodedContent = he.decode(response.data.votd.text);
-		return `${decodedContent} - ${response.data.votd.reference} \n${response.data.votd.permalink}`;
+		const reference = response.data.votd.reference;
+		const permalink = response.data.votd.permalink;
+		if(decodedContent.length > 140) { return `${reference}\n${permalink}`; }
+		return `${decodedContent} - ${reference}\n${permalink}`;
 	} catch (error) {
 		console.error("Error fetching quote:", error);
 		return "Inspirational message of the day!";
