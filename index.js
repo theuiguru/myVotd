@@ -30,7 +30,7 @@ async function fetchQuote() {
 		const decodedContent = he.decode(response.data.votd.text);
 		const reference = response.data.votd.reference;
 		const permalink = response.data.votd.permalink;
-		if(decodedContent.length > 140) { return `${reference}\n${permalink}`; }
+		if(decodedContent.length > 280) { return `${reference}\n${permalink}`; }
 		return `${decodedContent} - ${reference}\n${permalink}`;
 	} catch (error) {
 		console.error("Error fetching quote:", error);
