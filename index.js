@@ -21,7 +21,7 @@ const twitter = new TwitterStrategy({
 
 // create a client that will post to all three
 const client = new Client({
-	strategies: [bluesky, twitter],
+	strategies: [bluesky],
 });
 
 async function fetchQuote() {
