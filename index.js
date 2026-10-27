@@ -11,14 +11,6 @@ const bluesky = new BlueskyStrategy({
 	host: "bsky.social", // "bsky.social" for most people
 });
 
-// Note: OAuth app is required
-const twitter = new TwitterStrategy({
-	accessTokenKey: process.env.TX_ACCESS_TOKEN,
-	accessTokenSecret: process.env.TX_ACCESS_TOKEN_SECRET,
-	apiConsumerKey: process.env.TX_API_CONSUMER_KEY,
-	apiConsumerSecret: process.env.TX_CONSUMER_SECRET,
-});
-
 // create a client that will post to all three
 const client = new Client({
 	strategies: [bluesky],
