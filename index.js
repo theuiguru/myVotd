@@ -21,9 +21,13 @@ async function fetchQuote() {
 		const response = await axios.get("https://www.biblegateway.com/votd/get/?format=json&version=nkjv");
 		const decodedContent = he.decode(response.data.votd.text);
 		const reference = response.data.votd.reference;
-		const permalink = response.data.votd.permalink;
-		if(decodedContent.length > 280) { return `${reference}\n${permalink}`; }
-		return `${decodedContent} - ${reference}\n${permalink}`;
+		// Clean HTML entities from the permalink URL
+		const permalink = he.decode(response.data.votd.permalink).replaceAll("&amp;", "&");
+
+		if (decodedContent.length > 250) { 
+			return `${reference}\n\n${permalink}`; 
+		}
+		return `"${decodedContent}" - ${reference}\n\n${permalink}`;
 	} catch (error) {
 		console.error("Error fetching quote:", error);
 		return "Inspirational message of the day!";
