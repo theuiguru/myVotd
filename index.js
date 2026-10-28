@@ -33,10 +33,12 @@ async function fetchQuote() {
 async function postUpdate() {
 	try {
 		const message = await fetchQuote();
+		console.log("Attempting to post message:\n", message);
 		await client.post(message);
 		console.log("Post sent successfully!");
 	} catch (error) {
 		console.error("Error posting:", error);
+		process.exit(1);
 	}
 }
 postUpdate();
