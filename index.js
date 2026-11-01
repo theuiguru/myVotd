@@ -21,13 +21,16 @@ async function fetchQuote() {
 		const response = await axios.get("https://www.biblegateway.com/votd/get/?format=json&version=nkjv");
 		const decodedContent = he.decode(response.data.votd.text);
 		const reference = response.data.votd.reference;
-		// Clean HTML entities from the permalink URL
 		const permalink = he.decode(response.data.votd.permalink).replaceAll("&amp;", "&");
 
-		if (decodedContent.length > 250) { 
-			return `${reference}\n\n${permalink}`; 
+		let message = `"${decodedContent}" - ${reference}\n\n${permalink}`;
+		
+		// Bluesky hard limit is 300 characters
+		if (message.length > 300) {
+			// Fallback to shorter format or reference + link only
+			message = `${reference}\n\n${permalink}`;
 		}
-		return `"${decodedContent}" - ${reference}\n\n${permalink}`;
+		return message;
 	} catch (error) {
 		console.error("Error fetching quote:", error);
 		return "Inspirational message of the day!";
